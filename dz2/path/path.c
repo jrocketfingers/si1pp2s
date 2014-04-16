@@ -121,12 +121,14 @@ main(void) {
             /*printf("%lu ", R[j]);*/
         }
 
+        /* choose the best path for the weighted matrix */
         for(j = 1; j < n + 1; j++) {
             weighted[i][j] = minimum(L[j], R[j]);
             entry[i][j] = (weighted[i][j] == L[j] ? LC[j] : RC[j]);
         }
     }
 
+    /* pick the minimum weight in the final row */
     for(j = 1; j < n + 1; j++) {
         if(weight > weighted[m - 1][j]) {
             weight = weighted[m - 1][j];
@@ -134,6 +136,7 @@ main(void) {
         }
     }
 
+    /* output the result using a simple stack */
     j = cursor;
     for(i = m - 1; i >= 0; i--) {
         while(j != cursor) {
