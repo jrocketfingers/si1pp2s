@@ -38,6 +38,16 @@ ex_allocate(int m, int n) {
     return table;
 }
 
+void
+ex_deallocate(unsigned long **table, int m, int n) {
+    int i, nn = n+ 2;
+
+    for(i = 0; i < m; i++)
+        free(table[i]);
+
+    free(table);
+}
+
 
 int
 main(void) {
@@ -141,6 +151,16 @@ main(void) {
     while(sp-- != 0) {
         printf("%d ", S[sp]);
     }
+
+    ex_deallocate(costs, m, n);
+    ex_deallocate(weighted, m, n);
+    ex_deallocate(entry, m, n);
+
+    free(L);
+    free(R);
+    free(LC);
+    free(RC);
+    free(S);
 
     return 0;
 }
